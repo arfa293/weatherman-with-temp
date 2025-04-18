@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Weather App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'weather-list' %}">Weather List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url  'index'%}">Weather Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-danger text-white" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-primary mb-4">Weather Data Entry</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label class="form-label">Date:</label>
+                <input type="date" name="date" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Max Temperature (°C):</label>
+                <input type="number" name="max_temperature" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Min Temperature (°C):</label>
+                <input type="number" name="min_temperature" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Humidity (%):</label>
+                <input type="number" name="humidity" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Max Humidity (%):</label>
+                <input type="number" name="max_humidity" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Min Humidity (%):</label>
+                <input type="number" name="min_humidity" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+
+        {% if message %}
+            <div class="alert alert-info mt-3 text-center">{{ message }}</div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
